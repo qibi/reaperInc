@@ -1,19 +1,18 @@
 platform = {
-	width = 0
-	height = 0
-	x = 0
+	width = 0,
+	height = 0,
+	x = 0,
 	y = 0
-
 }
 
 player = {
-	x = 0
-	y = 0
-	y_velocity = 0
-	speed = 20
-	img = nil
-	jump_height = -300
-	gravity = -500
+	x = 0,
+	y = 0,
+	y_velocity = 0,
+	speed = 20,
+	img = nil,
+	jump_height = -300,
+	gravity = -500,
 	ground = 0
 }
 
