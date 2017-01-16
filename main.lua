@@ -1,12 +1,29 @@
-platform = {}
-player = {}
+platform = {
+	width = 0
+	height = 0
+	x = 0
+	y = 0
 
+}
+
+player = {
+	x = 0
+	y = 0
+	y_velocity = 0
+	speed = 20
+	img = nil
+	jump_height = -300
+	gravity = -500
+	ground = 0
+}
+
+-- Called when game starts
 function love.load()
 	platform.width = love.graphics.getWidth()
 	platform.height = 10
 	platform.x = 0
 	platform.y = love.graphics.getHeight() - platform.height
-	player.img = love.graphics.newImage('reaper.jpg')
+	player.img = love.graphics.newImage('assets/imgs/reaper.jpg')
 	player.x = 0
 	player.y = love.graphics.getHeight() - player.img:getHeight()
 	player.ground = player.y
@@ -16,6 +33,7 @@ function love.load()
 	player.gravity = -500
 end
 
+-- Called on every frame
 function love.update(dt)
 	if love.keyboard.isDown('d') then
 		if player.x + player.img:getWidth() < love.graphics.getWidth() then
@@ -44,6 +62,7 @@ function love.update(dt)
 	end
 end
 
+-- Called on every frame
 function love.draw()
 	love.graphics.setColor(255,255,255)
 	love.graphics.rectangle('fill', platform.x, platform.y, platform.width, platform.height)
