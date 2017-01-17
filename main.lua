@@ -9,10 +9,10 @@ function love.load()
 	reaper = {}
 	reaper.img = love.graphics.newImage('assets/imgs/reaper.jpg')
 	reaper.body = love.physics.newBody(world, 0, love.graphics.getHeight() - reaper.img:getHeight(), "dynamic")
-	reaper.body:setMass(70)
+	reaper.body:setMass(reaper.img:getWidth()/2, reaper.img:getHeight()/2, 70, 1)
 	reaper.shape = love.physics.newRectangleShape(200,200)
 	reaper.fixture = love.physics.newFixture(reaper.body, reaper.shape)
-	reaper.fixture:setRestitution(0.2)
+	reaper.fixture:setRestitution(0.1)
 	reaper.fixture:setUserData("Reaper")
 
 	-- Platform
@@ -28,13 +28,20 @@ function love.update(dt)
 	world:update(dt)
 
 	if love.keyboard.isDown('d') then
-		reaper.body:applyForce(500*dt,0)
+		reaper.body:applyLinearImpulse(50,0)
 	elseif love.keyboard.isDown('a') then
-		reaper.body:applyForce(-500*dt,0)
+		reaper.body:applyLinearImpulse(-50,0)
 	else
-		reaper.body:setLinearVelocity(0,0)
+		x,y = reaper.body:getLinearVelocity()
+		reaper.body:setLinearVelocity(x/2,y)
 	end
-	if love.keyboard.isDown('space') then
+end
+
+function love.keypressed(key)
+	if key == "space" then
+		if next(reaper.body:getContactList()) ~= nil then
+			reaper.body:applyLinearImpulse(0,30000)
+		end
 	end
 end
 
