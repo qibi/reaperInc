@@ -1,10 +1,10 @@
 
 -- Called when game starts
-function love.load()	
+function love.load()
 	-- World
 	love.physics.setMeter(64)
 	world = love.physics.newWorld(0, 9.81*64, true)
-	
+
 	-- Reaper
 	reaper = {}
 	reaper.img = love.graphics.newImage('assets/imgs/reaper.jpg')
@@ -46,8 +46,10 @@ function love.update(dt)
 end
 
 function love.keypressed(key)
-	if key == 'space' and next(reaper.body:getContactList()) ~= nil then
+	if key == 'space' or key=='w' and next(reaper.body:getContactList()) ~= nil then
 		reaper.body:applyLinearImpulse(0,30000)
+	elseif key== 'r' then
+		love.load()
 	end
 end
 
